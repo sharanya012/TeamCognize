@@ -1,8 +1,17 @@
 from flask import Flask, render_template, request, redirect, url_for
+import mysql.connector
+from mysql.connector import Error
 
 app = Flask(__name__)
 
-users = {}  # Dummy storage for now
+# MySQL Connection
+db = mysql.connector.connect(
+    host="localhost",
+    user="shrina",  # Replace with your MySQL username
+    password="shrina",  # Replace with your MySQL password
+    database="intelliclaim"
+)
+cursor = db.cursor()
 
 @app.route("/")
 def home():
@@ -13,7 +22,11 @@ def login():
     if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]
-        if email in users and users[email] == password:
+        
+        cursor.execute("SELECT * FROM users WHERE email = %s AND password = %s", (email, password))
+        user = cursor.fetchone()
+
+        if user:
             return redirect(url_for("home"))
         else:
             return "Invalid credentials"
@@ -24,9 +37,17 @@ def signup():
     if request.method == "POST":
         name = request.form["name"]
         email = request.form["email"]
+        phone = request.form["phone"]
         password = request.form["password"]
-        users[email] = password
-        return redirect(url_for("login"))
+
+        try:
+            cursor.execute("INSERT INTO users (name, email, phone, password) VALUES (%s, %s, %s, %s)",
+                           (name, email, phone, password))
+            db.commit()
+            return redirect(url_for("login"))
+        except Error as e:
+            return f"Error: {e}"
+
     return render_template("signup.html")
 
 @app.route("/claim", methods=["GET", "POST"])
