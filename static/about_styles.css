@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    background: #343a40;
+    color: white;
+    padding: 15px;
+}
+
+nav .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-left: 20px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.about-hero {
+    height: 50vh;
+    background: url('https://source.unsplash.com/1600x900/?garage,repair') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.about-hero h1 {
+    font-size: 2.5rem;
+}
+
+.about-hero p {
+    font-size: 1.2rem;
+}
+
+.about-content .container {
+    width: 60%;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-content h2 {
+    margin-top: 20px;
+    color: #343a40;
+}
+
+.about-content p, .about-content ul {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.about-content ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background: #343a40;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
